@@ -1,0 +1,35 @@
+### Listar todos os celulares
+GET http://localhost:3000/celulares
+
+### Buscar celular por ID
+GET http://localhost:3000/celulares/1
+
+### Cadastrar um novo celular
+POST http://localhost:3000/celulares
+Content-Type: application/json
+
+{
+  "marca": "Samsung",
+  "modelo": "Galaxy S24 Ultra",
+  "preco": 6999.00,
+  "armazenamento": 512,
+  "cor": "Titan Black",
+  "estoque": 15,
+  "imagem_url": "https://exemplo.com/s24ultra.jpg"
+}
+
+### Atualizar um celular
+PUT http://localhost:3000/celulares/1
+Content-Type: application/json
+
+{
+  "marca": "Samsung",
+  "modelo": "Galaxy S24 Ultra",
+  "preco": 7299.00,
+  "armazenamento": 512,
+  "cor": "Titan Black",
+  "estoque": 12
+}
+
+### Desativar um celular
+DELETE http://localhost:3000/celulares/1
