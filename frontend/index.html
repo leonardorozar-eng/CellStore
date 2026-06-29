@@ -40,7 +40,7 @@
             </div>
 
             <div id="listaCelulares" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Celulares serão carregados aqui via JavaScript -->
+                <!-- Celulares serão carregados aqui -->
             </div>
         </div>
     </div>
@@ -48,76 +48,4 @@
     <script>
         const API_URL = 'http://localhost:3000';
 
-        // Carregar celulares
-        async function carregarCelulares() {
-            const container = document.getElementById('listaCelulares');
-            container.innerHTML = '<p class="text-zinc-400">Carregando...</p>';
-
-            try {
-                const res = await fetch(`${API_URL}/celulares`);
-                const celulares = await res.json();
-
-                container.innerHTML = '';
-
-                if (celulares.length === 0) {
-                    container.innerHTML = '<p class="text-zinc-400">Nenhum celular cadastrado ainda.</p>';
-                    return;
-                }
-
-                celulares.forEach(cel => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-zinc-900 p-5 rounded-2xl border border-zinc-800';
-                    card.innerHTML = `
-                        <div class="font-semibold text-lg">${cel.marca} ${cel.modelo}</div>
-                        <div class="text-emerald-400 text-xl font-bold mt-1">R$ ${parseFloat(cel.preco).toFixed(2)}</div>
-                        <div class="text-sm text-zinc-400 mt-2">
-                            ${cel.armazenamento}GB • ${cel.cor} • Estoque: ${cel.estoque}
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (error) {
-                container.innerHTML = '<p class="text-red-400">Erro ao carregar celulares.</p>';
-            }
-        }
-
-        // Cadastrar novo celular
-        document.getElementById('formCelular').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const dados = {
-                marca: document.getElementById('marca').value,
-                modelo: document.getElementById('modelo').value,
-                preco: parseFloat(document.getElementById('preco').value),
-                armazenamento: parseInt(document.getElementById('armazenamento').value),
-                cor: document.getElementById('cor').value,
-                estoque: parseInt(document.getElementById('estoque').value),
-                imagem_url: document.getElementById('imagem_url').value || null
-            };
-
-            try {
-                const res = await fetch(`${API_URL}/celulares`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dados)
-                });
-
-                if (res.ok) {
-                    alert('Celular cadastrado com sucesso!');
-                    document.getElementById('formCelular').reset();
-                    carregarCelulares();
-                } else {
-                    alert('Erro ao cadastrar celular.');
-                }
-            } catch (error) {
-                alert('Erro de conexão com a API.');
-            }
-        });
-
-        // Carregar lista ao abrir a página
-        window.onload = () => {
-            carregarCelulares();
-        };
-    </script>
-</body>
-</html>
+       

@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { Pool } from 'pg';
+import cors from '@fastify/cors';
 
 const sql = new Pool({
     user: "postgres",
@@ -11,6 +12,11 @@ const sql = new Pool({
 
 const servidor = Fastify({ logger: true });
 
+// ==================== CORS ====================
+await servidor.register(cors, {
+    origin: true,
+    credentials: true
+});
 // ==================== USUÁRIOS ====================
 
 // Cadastrar usuário
